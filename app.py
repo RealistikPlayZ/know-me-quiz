@@ -7,7 +7,7 @@ leaderboard = []
 
 @app.route('/')
 def home():
-    return send_from_directory('.', 'quizhome.html')
+    return send_from_directory('.', 'quizhome.index')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
