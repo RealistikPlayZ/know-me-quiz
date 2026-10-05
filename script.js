@@ -1,6 +1,4 @@
-// JavaScript Document
 
-// --- 1. QUESTIONS DATA STRUCTURE ---
 const questions = [
   {
     question: "What is my absolute favorite color?",
