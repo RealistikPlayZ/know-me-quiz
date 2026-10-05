@@ -24,10 +24,6 @@ const questions = [
     options: ["Java", "C++", "Python", "Ruby"],
     correct: 2
   },
-  {
-  question: "Question1",
-  options: ["", "", "", ""],
-  correct: N/A
 ];
 
 const startScreen = document.getElementById("start-screen");
