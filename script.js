@@ -1,4 +1,3 @@
-
 const questions = [
   {
     question: "What is my absolute favorite color?",
@@ -24,10 +23,13 @@ const questions = [
     question: "Which programming language am I currently intermediate at?",
     options: ["Java", "C++", "Python", "Ruby"],
     correct: 2
-  }
+  },
+  {
+  question: "Question1",
+  options: ["", "", "", ""],
+  correct: N/A
 ];
 
-// --- 2. DOM ELEMENTS ---
 const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const resultScreen = document.getElementById("result-screen");
@@ -46,12 +48,10 @@ const finalMessage = document.getElementById("final-message");
 const finalScore = document.getElementById("final-score");
 const totalQuestions = document.getElementById("total-questions");
 
-// --- 3. STATE VARIABLES ---
 let currentQuestionIndex = 0;
 let score = 0;
 let playerName = "";
 
-// --- 4. EVENT LISTENERS ---
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", () => {
   currentQuestionIndex++;
@@ -63,7 +63,6 @@ nextBtn.addEventListener("click", () => {
 });
 restartBtn.addEventListener("click", restartQuiz);
 
-// --- 5. FUNCTIONS ---
 function startQuiz() {
   playerName = usernameInput.value.trim();
   
@@ -72,7 +71,6 @@ function startQuiz() {
     return;
   }
 
-  // Switch from Start Screen to Quiz Screen
   startScreen.classList.add("hide");
   quizScreen.classList.remove("hide");
 
@@ -87,12 +85,10 @@ function showQuestion() {
   const currentQuestion = questions[currentQuestionIndex];
   questionText.innerText = currentQuestion.question;
 
-  // Update progress text and bar
   progressText.innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
   const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
   progressBar.style.width = `${progressPercent}%`;
 
-  // Render option buttons dynamically
   currentQuestion.options.forEach((option, index) => {
     const button = document.createElement("button");
     button.innerText = option;
@@ -117,17 +113,14 @@ function selectOption(selectedBtn, selectedIndex) {
   } else {
     selectedBtn.classList.add("incorrect");
     
-    // Highlight the correct answer for visual feedback
     const allButtons = optionsContainer.children;
     allButtons[currentQuestion.correct].classList.add("correct");
   }
 
-  // Disable all buttons once an option is picked
   Array.from(optionsContainer.children).forEach(button => {
     button.disabled = true;
   });
 
-  // Reveal the Next button
   nextBtn.classList.remove("hide");
 }
 
@@ -138,7 +131,6 @@ function showResults() {
   finalScore.innerText = score;
   totalQuestions.innerText = questions.length;
 
-  // Custom result message based on performance
   const percentage = (score / questions.length) * 100;
   if (percentage === 100) {
     finalMessage.innerText = `Incredible, ${playerName}! You know me perfectly! 🏆`;
@@ -148,7 +140,6 @@ function showResults() {
     finalMessage.innerText = `Nice try, ${playerName}! We should hangout more often! 😄`;
   }
 
-  // Send the score to your Python server
   sendScoreToPython(playerName, score);
 }
 
